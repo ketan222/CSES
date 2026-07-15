@@ -43,3 +43,7 @@ when you see:
 
 If unsure → use long
 If multiplying → use 1L
+
+Sorting pattern
+    Subarray starting or ending at an index
+ 
