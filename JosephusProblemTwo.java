@@ -1,34 +1,32 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
-/******************************************************************************
-
-                            Online Java Compiler.
-                Code, Compile, Run and Debug java program online.
-Write your code in this editor and press "Run" button to execute it.
-
-*******************************************************************************/
-import java.util.*;
-
-public class JosephusProblemOne {
-
+public class JosephusProblemTwo {
     public static void main(String[] args) {
         Queue<Integer> que = new LinkedList<>();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+        int k = sc.nextInt();
 
         for (int i = 1; i <= n; i++) {
             que.add(i);
         }
         boolean flag = false;
         StringBuilder str = new StringBuilder();
+        int count = 0;
         while (!que.isEmpty()) {
             int num = que.remove();
             if (!flag) {
+                count++;
                 que.add(num);
-                flag = true;
+                if (count == k)
+                    flag = true;
             } else {
                 str.append(num + " ");
                 flag = false;
+                count = 0;
             }
         }
         System.out.println(str);
