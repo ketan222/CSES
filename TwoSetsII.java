@@ -1,19 +1,18 @@
 import java.util.*;
 class TwoSetsII{
-    public static Integer[][] dp;
-    public static int solve(int i, int currSum){
-        if(i <= 0){
-            if(i == 0 && currSum == 0) return 1;
-            return 0;
+    public static Long[][] dp;
+    public static final int MOD = 1000000007;
+    public static long solve(int i, int currSum){
+        if(currSum == 0) return 1;
+        if(i == 0) return 0;
+
+        if(dp[i][currSum] != null) return dp[i][currSum];
+        
+        if(currSum >= i){
+            return dp[i][currSum] =
+                (solve(i-1, currSum) + solve(i-1, currSum-i)) % MOD;
         }
-        // if(dp[i][currSum] != null) return dp[i][currSum];
-
-        // int ans = currSum >= i ? solve(i-1, currSum-i) : 0;
-        int ans = solve(i-1, currSum-i);
-        ans += solve(i-1, currSum+i);
-
-        // return dp[i][currSum] = ans;
-        return ans;
+        return dp[i][currSum] = solve(i-1, currSum);
     }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -25,8 +24,11 @@ class TwoSetsII{
             System.out.println(0);
             return;
         }
-        
-        dp = new Integer[n+1][maxSum + 1];
-        System.out.println(solve(n, 0));
+
+        dp = new Long[n+1][maxSum/2 + 1];
+    
+        System.out.println(
+            (int)((long) solve(n, maxSum/2) * 500000004 % MOD)
+        );
     }
 }
